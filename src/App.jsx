@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabase-client";
+import AuthModal from "./components/authModal";
 
 export default function App() {
+  const [isSignedIn, setIsSignedIn] = useState(false);
   const [newTask, setNewTask] = useState({ title: "", description: "" });
   const [tasks, setTasks] = useState([]);
 
@@ -80,7 +82,7 @@ export default function App() {
     }, 0);
   }, []);
 
-  return (
+  return isSignedIn ? (
     <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-md space-y-6">
         <h1 className="text-2xl font-bold text-center tracking-tight text-zinc-100">
@@ -216,5 +218,7 @@ export default function App() {
         </div>
       </div>
     </div>
+  ) : (
+    <AuthModal setIsSignedIn={setIsSignedIn} />
   );
 }
