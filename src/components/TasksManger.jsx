@@ -73,6 +73,11 @@ export default function TasksManger() {
     fetchTasks();
   };
 
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) console.log("Logout error:", error.message);
+  };
+
   useEffect(() => {
     setTimeout(() => {
       fetchTasks();
@@ -217,6 +222,9 @@ export default function TasksManger() {
           </div>
         </div>
         <button
+          onClick={() => {
+            handleLogout();
+          }}
           type="button"
           className="inline-flex items-center justify-center gap-2 px-3.5 py-2 text-xs font-medium text-zinc-400 hover:text-red-400 bg-zinc-900/60 hover:bg-red-500/10 border border-zinc-800 hover:border-red-500/20 rounded-lg shadow-sm backdrop-blur-sm transition-all duration-150 active:scale-[0.98] mt-10"
         >

@@ -3,7 +3,6 @@ import { supabase } from "../supabase-client";
 
 export default function AuthModal({ onClose }) {
   const [activeTab, setActiveTab] = useState("login");
-  const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -18,7 +17,7 @@ export default function AuthModal({ onClose }) {
         console.log("error occured during login:", loginError.message);
       }
     } else {
-      const { error: registerError } = await supabase.auth.singUp({
+      const { error: registerError } = await supabase.auth.signUp({
         email,
         password,
       });
@@ -179,19 +178,6 @@ export default function AuthModal({ onClose }) {
                   onSubmit={handleSubmit}
                   className="space-y-4 block animate-fade-in"
                 >
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-medium text-zinc-300">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      value={userName}
-                      placeholder="John Doe"
-                      onChange={(e) => setUserName(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-100 placeholder-zinc-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all"
-                    />
-                  </div>
-
                   <div className="space-y-1.5">
                     <label className="text-xs font-medium text-zinc-300">
                       Email Address
