@@ -26,5 +26,5 @@ export default function App() {
     };
   }, []);
 
-  return <>{session ? <TasksManger /> : <AuthModal />}</>;
+  return <>{session ? <TasksManger session={session} /> : <AuthModal />}</>;
 }
